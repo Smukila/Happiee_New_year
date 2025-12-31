@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Year Surprise</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial;
+    color:white;
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+}
+
+.gift{
+    font-size:140px;
+    cursor:pointer;
+    animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+
+#wish{
+    display:none;
+    animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+.firework{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:gold;
+    border-radius:50%;
+    animation:explode 1s linear infinite;
+}
+
+@keyframes explode{
+    0%{transform:scale(0); opacity:1;}
+    100%{transform:scale(15); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1 id="tap">🎁 Tap the Gift</h1>
+
+    <div class="gift" onclick="openGift()">🎁</div>
+
+    <div id="wish">
+        <h1>🎉 Happy New Year 2026 🎉</h1>
+        <h2>✨ May all your dreams come true ✨</h2>
+        <p>With love & happiness 💖</p>
+    </div>
+</div>
+
+<script>
+function openGift(){
+    document.querySelector('.gift').style.display='none';
+    document.getElementById('tap').style.display='none';
+    document.getElementById('wish').style.display='block';
+    document.getElementById('music').play();
+    createFireworks();
+}
+
+function createFireworks(){
+    for(let i=0;i<30;i++){
+        let f=document.createElement('div');
+        f.className='firework';
+        f.style.left=Math.random()*100+'vw';
+        f.style.top=Math.random()*100+'vh';
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+    setTimeout(createFireworks,1200);
+}
+</script>
+
+</body>
+</html>
